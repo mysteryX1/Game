@@ -1,0 +1,180 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>孤山</title>
+    <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
+    <script src="https://cache.amap.com/lbs/static/es5.min.js"></script>
+<style type="text/css">
+.amap-marker-label{
+    width: 60px;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+    height: 18px;
+    font-family: STLiti;
+    color: green;
+    border-radius: 15px;
+    background-color: rgba(255,255,255,0.4);
+    border: solid 2px rgba(100,255,200,0.8);
+}
+</style>
+  <script type="text/javascript" src="../lib/tiantan_v2.js"></script>
+<script src="https://webapi.amap.com/maps?v=2.0&key=ebb9b3f2537318036110ea60b6fab2c0&plugin=AMap.ElasticMarker"></script>
+</head>
+<body>
+<div id="container" ></div>
+<script>
+    //缩放地图看看！！！
+    var map = new AMap.Map('container', {
+        viewMode: '3D',
+        turboMode: false,
+        showIndoorMap: false,
+        defaultCursor: 'pointer',
+        showBuildingBlock: false,
+        zooms: [14, 20],
+        showLabel: false,
+        zoom: 16,
+        pitch: 55,
+        rotation: 0,
+        center: [120.142688,30.251674],
+        forceVector: true,
+    });
+    var facilities = [];
+    var zoomStyleMapping1 = {
+        14: 0,
+        15: 0,
+        16: 0,
+        17: 0,
+        18: 0,
+        19: 0,
+        20: 0
+    };
+    for (var i = 0; i < sheshi.length; i += 1) {
+        var marker = new AMap.ElasticMarker({
+            position: sheshi[i].position,
+            zooms: [14, 20],
+            styles: [{
+                icon: {
+                    img: sheshi[i].icon,
+                    size: [16, 16],//可见区域的大小
+                    anchor: 'bottom-center',//锚点
+                    fitZoom: 14,//最合适的级别
+                    scaleFactor: 2,//地图放大一级的缩放比例系数
+                    maxScale: 1.4,//最大放大比例
+                    minScale: 0.8//最小放大比例
+                }
+            }],
+            zoomStyleMapping: zoomStyleMapping1
+        })
+        facilities.push(marker);
+    }
+    map.add(facilities);
+
+    var spots = [];
+    var zoomStyleMapping2 = {
+        14: 0,
+        15: 0,
+        16: 1,
+        17: 1,
+        18: 1,
+        19: 1,
+        20: 1
+    }
+    for (var i = 0; i < touristSpots.length; i += 1) {
+        var marker = new AMap.ElasticMarker({
+            position: touristSpots[i].position,
+            zooms: [14, 20],
+            styles: [{
+                icon: {
+                    img: touristSpots[i].smallIcon,
+                    size: [16, 16],//可见区域的大小
+                    anchor: 'bottom-center',//锚点
+                    fitZoom: 14,//最合适的级别
+                    scaleFactor: 2,//地图放大一级的缩放比例系数
+                    maxScale: 2,//最大放大比例
+                    minScale: 1//最小放大比例
+                },
+                label: {
+                    content: touristSpots[i].name,
+                    position: 'BM',
+                    minZoom: 15
+                }
+            }, {
+                icon: {
+                    img: touristSpots[i].bigIcon,
+                    size: touristSpots[i].size,
+                    anchor: touristSpots[i].anchor,
+                    fitZoom: 17.5,
+                    scaleFactor: 2,
+                    maxScale: 2,
+                    minScale: 0.125
+                },
+                label: {
+                    content: touristSpots[i].name,
+                    position: 'BM'
+                }
+            }],
+            zoomStyleMapping: zoomStyleMapping2
+        })
+        spots.push(marker);
+    }
+    map.add(spots);
+
+
+
+    new AMap.Polygon({
+        cursor: 'pointer',
+        bubble: true,
+        path: [[120.138904,30.251689], [120.139226,30.251546], [120.140128,30.251671], [120.14132,30.252388], [120.140988,30.253006], [120.142439,30.253489], [120.144087,30.253614], [120.14586,30.252495], [120.146316,30.252038], [120.145549,30.251698], [120.144533,30.250382], [120.142481,30.250113], [120.139692,30.249952],[120.138737,30.250363], [120.138832,30.251636] ],
+        map: map,
+        fillOpacity: 0.3,
+        strokeWeight: 1,
+        fillColor: 'green'
+
+    });
+
+
+    var path = [
+      [120.13255,30.245954],
+      [120.13041,30.252637],
+      [120.135782,30.251239],
+      [120.138382,30.252256],
+      [120.14136,30.251446],
+      [120.146083,30.252336],
+      [120.149369,30.256236],
+      [120.154716,30.260587]
+    
+  ]
+
+
+ 
+    
+    var polyline = new AMap.Polyline({
+      path: path,
+      isOutline: true,
+      outlineColor: '#ffeeff',
+      borderWeight: 3,
+      strokeColor: "#3377FF",
+      strokeOpacity: 1,
+      strokeWeight: 6,
+      // 折线样式还支持 'dashed'
+      strokeStyle: "solid",
+      // strokeStyle是dashed时有效
+      strokeDasharray: [10, 5],
+      lineJoin: 'round',
+      lineCap: 'round',
+      zIndex: 50,
+    })
+
+   
+    
+
+    map.add([polyline]);
+ //   map.setFitView();
+  </script>
+  
+</body>
+</html>

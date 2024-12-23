@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <style>
+    html,
+    body,
+    #container {
+      width: 100%;
+      height: 100%;
+    }
+    </style>
+    <title>折线的绘制和编辑</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+    <script src="https://webapi.amap.com/maps?v=2.0&key=ebb9b3f2537318036110ea60b6fab2c0&plugin=AMap.PolylineEditor"></script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+</head>
+<body>
+<div id="container"></div>
+<script type="text/javascript">
+    var map = new AMap.Map("container", {
+      center: [120.142595,30.251707],
+      zoom: 14
+    });
+
+    var path = [
+      [120.144764,30.252085],
+      [120.145082,30.252077],
+      [120.145104,30.252085],
+      [120.14529,30.252238],
+      [120.145195,30.252481],
+      [120.145014,30.252845],
+      [120.144819,30.252787],
+      [120.144732,30.252802],
+      [120.144428,30.252928],
+      [120.144143,30.253081]
+    ];
+  var path2 = [
+    [[120.144143,30.253092],
+      [120.144043,30.253378],
+      [120.143889,30.253167],
+      [120.143535,30.253077],
+      [120.143508,30.252853]
+    ]
+  ]
+
+    var polyline = new AMap.Polyline({
+      path: path,
+      isOutline: true,
+      outlineColor: '#ffeeff',
+      borderWeight: 3,
+      strokeColor: "#3366FF",
+      strokeOpacity: 1,
+      strokeWeight: 6,
+      // 折线样式还支持 'dashed'
+      strokeStyle: "solid",
+      // strokeStyle是dashed时有效
+      strokeDasharray: [10, 5],
+      lineJoin: 'round',
+      lineCap: 'round',
+      zIndex: 50,
+    })
+
+    var polyline2 = new AMap.Polyline({
+      path: path2,
+      isOutline: true,
+      outlineColor: '#ffeeff',
+      borderWeight: 3,
+      strokeColor: "#3366FF",
+      strokeOpacity: 1,
+      strokeWeight: 6,
+      // 折线样式还支持 'dashed'
+      strokeStyle: "dashed",
+      // strokeStyle是dashed时有效
+      strokeDasharray: [15, 5],
+      lineJoin: 'round',
+      lineCap: 'round',
+      zIndex: 50,
+    })
+    map.add([polyline,polyline2]);
+    map.setFitView();
+  </script>
+</body>
+</html>
